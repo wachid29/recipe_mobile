@@ -45,7 +45,7 @@ const getNewestRecipe = async (req, res) => {
     res.status(400).send("ada yang error");
   }
 };
-s
+
 const findRecipe = async (req, res) => {
   //cari berdasarkan title
   try {
