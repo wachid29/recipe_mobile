@@ -20,8 +20,10 @@ Router.delete(
   controller.deleteUsers
 );
 
-Router.post("/recipebyuser", middleware.checkToken, controller.recipeByUser);
+Router.get("/recipebyuser", controller.recipeByUser);
 
 Router.patch("/userdata/editPhoto", upload.uploadprofile, controller.editPhoto);
+
+Router.get("/userdata/findByID", controller.findUserByID);
 
 module.exports = Router;

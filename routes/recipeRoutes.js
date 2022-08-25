@@ -7,20 +7,11 @@ Router.get("/recipe", controller.getRecipe);
 
 Router.get("/recipe/pages", controller.getRecipePage);
 
-Router.get(
-  "/recipe/get5data",
-  middleware.checkToken,
-  controller.getNewestRecipe
-);
+Router.get("/recipe/get5data", controller.getNewestRecipe);
 
 Router.get("/recipe/find", controller.findRecipe);
 
-Router.post(
-  "/recipe/add",
-  middleware.checkToken,
-  upload.uploadSingle,
-  controller.addNewRecipe
-);
+Router.post("/recipe/add", upload.uploadSingle, controller.addNewRecipe);
 
 Router.patch("/recipe/edit", controller.editRecipe);
 

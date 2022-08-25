@@ -45,7 +45,7 @@ const getNewestRecipe = async (req, res) => {
     res.status(400).send("ada yang error");
   }
 };
-
+s
 const findRecipe = async (req, res) => {
   //cari berdasarkan title
   try {
@@ -68,13 +68,15 @@ const addNewRecipe = async (req, res) => {
   try {
     if (req?.file) {
       const image = `http://localhost:8001/images/${req.file.filename}`;
-      const { title_recipe, ingredients, vidio_step, user_id } = req.body;
+      const { title_recipe, ingredients, description, vidio_step, user_id } =
+        req.body;
       //console.log(req.body);
 
       const postRecipe = await model.addedRecipe(
         title_recipe,
         image,
         ingredients,
+        description,
         vidio_step,
         user_id
       );

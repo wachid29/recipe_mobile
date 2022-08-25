@@ -2,7 +2,7 @@ const db = require("../db");
 
 const getAllRecipe = () => {
   return new Promise((resolve, reject) => {
-    db.query(`SELECT * FROM recipe ORDER BY id ASC`, (error, result) => {
+    db.query(`SELECT * FROM recipe ORDER BY id DESC `, (error, result) => {
       if (error) {
         reject(error);
       } else {
@@ -46,8 +46,8 @@ const get5Recipe = () => {
 const findRecipeByTitle = (title_recipe) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `SELECT * FROM recipe WHERE title_recipe LIKE $1`,
-      [`%${title_recipe}%`],
+      `SELECT * FROM recipe WHERE title_recipe ~* $1`,
+      [title_recipe],
       (error, result) => {
         if (error) {
           reject(error);
@@ -59,12 +59,19 @@ const findRecipeByTitle = (title_recipe) => {
   });
 };
 
-const addedRecipe = (title_recipe, image, ingredients, vidio_step, user_id) => {
+const addedRecipe = (
+  title_recipe,
+  image,
+  ingredients,
+  description,
+  vidio_step,
+  user_id
+) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `INSERT INTO recipe (title_recipe,image,ingredients,vidio_step,user_id) 
-    VALUES ($1,$2,$3,$4,$5)`,
-      [title_recipe, image, ingredients, vidio_step, user_id],
+      `INSERT INTO recipe (title_recipe,image,ingredients,description,vidio_step,user_id) 
+    VALUES ($1,$2,$3,$4,$5,$6)`,
+      [title_recipe, image, ingredients, description, vidio_step, user_id],
       (error, result) => {
         if (error) {
           reject(error);

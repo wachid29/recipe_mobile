@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-const port = process.env.PORT || 8002;
+const port = process.env.PORT || 8001;
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const cors = require("cors");
@@ -11,6 +11,9 @@ const userDataRoutes = require("./routes/userDataRoutes");
 const commentRoutes = require("./routes/commentRoutes");
 const recipeRoutes = require("./routes/recipeRoutes");
 const authRoutes = require("./routes/authRoutes");
+const likeRoutes = require("./routes/likeRoutes");
+const saveRoutes = require("./routes/saveRoutes");
+
 const { options } = require("pg/lib/defaults");
 
 // var allowlist = ["http://localhost:3000"];
@@ -57,6 +60,8 @@ app.use("/", cors(corsOptions), userDataRoutes);
 app.use("/", cors(corsOptions), commentRoutes);
 app.use("/", cors(corsOptions), recipeRoutes);
 app.use("/", cors(corsOptions), authRoutes);
+app.use("/", cors(corsOptions), likeRoutes);
+app.use("/", cors(corsOptions), saveRoutes);
 
 app.use("*", (req, res) => {
   res.send("sukses");

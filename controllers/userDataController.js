@@ -156,10 +156,10 @@ const deleteUsers = async (req, res) => {
 
 const recipeByUser = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.query;
     const getData = await model.findbyID(id);
     if (getData?.rowCount) {
-      const { id } = req.body;
+      const { id } = req.query;
       const getRecipeUser = await model.getRecipeUser(id);
       res.status(200).json({
         user: getData?.rows,
@@ -197,6 +197,23 @@ const editPhoto = async (req, res) => {
   }
 };
 
+const findUserByID = async (req, res) => {
+  //cari berdasarkan name
+  try {
+    const { id } = req.query;
+    const getData = await model.findbyID(id);
+    if (getData?.rowCount) {
+      res
+        .status(200)
+        .json({ user: getData?.rows, jumlahData: getData?.rowCount });
+    } else {
+      res.status(400).send("data tidak ditemukan");
+    }
+  } catch (error) {
+    res.status(400).send("ada yang error");
+  }
+};
+
 module.exports = {
   getUsersPage,
   getUsers,
@@ -206,4 +223,5 @@ module.exports = {
   deleteUsers,
   recipeByUser,
   editPhoto,
+  findUserByID,
 };
