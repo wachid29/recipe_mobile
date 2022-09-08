@@ -1,10 +1,10 @@
-const { crossOriginResourcePolicy } = require("helmet");
-const db = require("../db");
 const model = require("../model/recipeModel");
+const cloudinary = require("../middleware/cloudinary");
 
 const getRecipe = async (req, res) => {
   try {
-    const getDataRecipe = await model.getAllRecipe();
+    const { filter } = req.query;
+    const getDataRecipe = await model.getAllRecipe(filter);
     res.status(200).json({
       recipe: getDataRecipe?.rows,
       jumlahData: getDataRecipe?.rowCount,
@@ -49,8 +49,8 @@ const getNewestRecipe = async (req, res) => {
 const findRecipe = async (req, res) => {
   //cari berdasarkan title
   try {
-    const { title_recipe } = req.query;
-    const getDataRecipe = await model.findRecipeByTitle(title_recipe);
+    const { title_recipe, filter } = req.query;
+    const getDataRecipe = await model.findRecipeByTitle(title_recipe, filter);
     if (getDataRecipe?.rowCount) {
       res.status(200).json({
         recipe: getDataRecipe?.rows,
@@ -66,11 +66,14 @@ const findRecipe = async (req, res) => {
 
 const addNewRecipe = async (req, res) => {
   try {
+    const { title_recipe, ingredients, description, vidio_step, user_id } =
+      req.body;
     if (req?.file) {
-      const image = `http://localhost:8001/images/${req.file.filename}`;
-      const { title_recipe, ingredients, description, vidio_step, user_id } =
-        req.body;
-      //console.log(req.body);
+      const uploadImage =
+        (await cloudinary.uploader.upload(req?.file?.path, {
+          folder: "recipe-photo",
+        })) || null;
+      const image = uploadImage.secure_url;
 
       const postRecipe = await model.addedRecipe(
         title_recipe,

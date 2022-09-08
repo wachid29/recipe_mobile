@@ -1,7 +1,7 @@
 const Router = require("express").Router();
 const controller = require("../controllers/recipeController");
 const upload = require("../middleware/upload");
-const middleware = require("../middleware/auth");
+const validation = require("../middleware/validation-middleware");
 
 Router.get("/recipe", controller.getRecipe);
 
@@ -11,7 +11,12 @@ Router.get("/recipe/get5data", controller.getNewestRecipe);
 
 Router.get("/recipe/find", controller.findRecipe);
 
-Router.post("/recipe/add", upload.uploadSingle, controller.addNewRecipe);
+Router.post(
+  "/recipe/add",
+  upload.uploadSingle,
+  validation.addRecipe,
+  controller.addNewRecipe
+);
 
 Router.patch("/recipe/edit", controller.editRecipe);
 

@@ -1,14 +1,18 @@
 const db = require("../db");
 
-const getAllRecipe = () => {
+const getAllRecipe = (filter) => {
   return new Promise((resolve, reject) => {
-    db.query(`SELECT * FROM recipe ORDER BY id DESC `, (error, result) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(result);
+    db.query(
+      `SELECT * FROM recipe ORDER BY id ${filter} `,
+
+      (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
       }
-    });
+    );
   });
 };
 
@@ -43,10 +47,10 @@ const get5Recipe = () => {
   });
 };
 
-const findRecipeByTitle = (title_recipe) => {
+const findRecipeByTitle = (title_recipe, filter) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `SELECT * FROM recipe WHERE title_recipe ~* $1`,
+      `SELECT * FROM recipe WHERE title_recipe ~* $1 ORDER BY id ${filter}`,
       [title_recipe],
       (error, result) => {
         if (error) {

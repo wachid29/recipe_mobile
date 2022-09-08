@@ -1,29 +1,41 @@
-const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+let test1 = [3, 2, 1, 6, 4, 5];
+let test2 = [6, 5, 4, 3, 2, 1];
+let test3 = [1, 2, 3, 4, 5, 6];
+let test4 = [];
+let test5 = [2, 2, 2, 2, 1];
+// edit here
 
-app.use(bodyParser.json());
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+function sort(input) {
+  for (let i = input.length; i > 0; i--) {
+    for (let a = 0; a < i; a++) {
+      let c = input[a];
+      let b = input[a + 1];
 
-app.use("/profiles", express.static("profiles"));
+      if (c > b) {
+        let compare = input[a] - input[a + 1];
+        input[a] = input[a + 1];
+        input[a + 1] = input[a] + compare;
+      }
+    }
+  }
+  return input;
+}
 
-app.post("/test", (req, res) => {
-  const { password } = req.body;
-  console.log(req.body);
-  // const salt = bcrypt.genSaltSync(5); // generate random string
-  // const hash = bcrypt.hashSync(password, salt); // hash password
-  // var token = jwt.sign(
-  //   { foo: "bar" },
-  //   "bf067373cf107a04ffee8df4173b5964dd9525a184628e4a8d67a8c71b1d57b1"
-  // );
+console.log(sort(test2));
+// dont edit here
 
-  res.send("ok");
-});
-app.listen(8002);
+function isSorted(input) {
+  let flag = true;
+  for (let i = 0; i < input.length - 1; i++) {
+    if (input[i] > input[i + 1]) {
+      flag = false;
+      break;
+    }
+  }
+  return flag;
+}
 
-// pass: "$2b$15$T4b9UI1iMdLBTtSVMDch1.MHSZT/lAwETB8R.YJEvKHRh7ARx/O8u"
-// pass2: "$2b$05$3.a55/SMAavrsQ2m6AhRqek0QnD6AntDydcbFDGaPIhdGU/NfyHyK"
-// pass3: "$2b$10$keNuydXZ83nDLhJX22rAQ.0DVwRBoYLoWRIeOpQwbZliktIZxyGf6"
+console.log(isSorted(sort(test1)));
+console.log(isSorted(sort(test2)));
+console.log(isSorted(sort(test3)));
+console.log(isSorted(sort(test4)));
