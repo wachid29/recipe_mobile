@@ -39,7 +39,7 @@ const { options } = require("pg/lib/defaults");
 // };
 
 const whitelist = [
-  "https://learn-next-production.up.railway.app/",
+  "https://learn-next-production.up.railway.app",
   "http://localhost:3000",
 ];
 const corsOptions = {
