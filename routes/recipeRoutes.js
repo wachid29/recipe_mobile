@@ -18,7 +18,7 @@ Router.post(
   controller.addNewRecipe
 );
 
-Router.patch("/recipe/edit", controller.editRecipe);
+Router.put("/recipe/edit", controller.editRecipe);
 
 Router.delete("/recipe/delete", controller.deleteRecipe);
 
