@@ -182,6 +182,24 @@ const commentByRecipeID = async (req, res) => {
   }
 };
 
+const findRecipeByID = async (req, res) => {
+  //cari berdasarkan title
+  try {
+    const { id } = req.params;
+    const getDataRecipe = await model.findRecipeByID(id);
+    if (getDataRecipe?.rowCount) {
+      res.status(200).json({
+        recipe: getDataRecipe?.rows,
+        jumlahData: getDataRecipe?.rowCount,
+      });
+    } else {
+      res.status(400).send("data tidak ditemukan");
+    }
+  } catch (error) {
+    res.status(400).send("ada yang error");
+  }
+};
+
 module.exports = {
   getRecipe,
   getRecipePage,
@@ -192,4 +210,5 @@ module.exports = {
   deleteRecipe,
   commentByRecipe,
   commentByRecipeID,
+  findRecipeByID,
 };

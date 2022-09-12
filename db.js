@@ -1,5 +1,3 @@
-// const postgre = require("pg").Pool;
-// const postgre = require("pg").Client;
 const { Pool, Client } = require("pg");
 require("dotenv").config();
 
