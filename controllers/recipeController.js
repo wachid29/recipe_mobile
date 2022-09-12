@@ -96,7 +96,7 @@ const editRecipe = async (req, res) => {
   try {
     const { id, title_recipe, image, ingredients, vidio_step, user_id } =
       req.body;
-    console.log(id, title_recipe);
+
     const getDataRecipe = await model.findRecipeByID(id);
     if (getDataRecipe?.rowCount) {
       let inputTitle_recipe =
@@ -125,6 +125,7 @@ const editRecipe = async (req, res) => {
       res.status(400).send("data tidak ditemukan");
     }
   } catch (error) {
+    console.log(error);
     res.status(400).send("ada yang error");
   }
 };
