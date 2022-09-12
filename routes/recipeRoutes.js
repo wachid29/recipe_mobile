@@ -24,6 +24,6 @@ Router.delete("/recipe/delete", controller.deleteRecipe);
 
 Router.get("/commentbyrecipe", controller.commentByRecipeID);
 
-Router.get("/recipe/findByID/:id", controller.findRecipe);
+Router.get("/recipe/findByID", controller.findRecipe);
 
 module.exports = Router;

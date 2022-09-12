@@ -185,7 +185,7 @@ const commentByRecipeID = async (req, res) => {
 const findRecipeByID = async (req, res) => {
   //cari berdasarkan title
   try {
-    const { id } = req.params;
+    const { id } = req.query;
     const getDataRecipe = await model.findRecipeByID(id);
     if (getDataRecipe?.rowCount) {
       res.status(200).json({
