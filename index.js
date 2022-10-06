@@ -14,7 +14,7 @@ const authRoutes = require("./routes/authRoutes");
 const likeRoutes = require("./routes/likeRoutes");
 const saveRoutes = require("./routes/saveRoutes");
 
-const { options } = require("pg/lib/defaults");
+// const { options } = require("pg/lib/defaults");
 
 // var allowlist = ["http://localhost:3000"];
 // const corsOptionsDelegate = function (req, callback) {
