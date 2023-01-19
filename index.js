@@ -14,7 +14,7 @@ const authRoutes = require("./routes/authRoutes");
 const likeRoutes = require("./routes/likeRoutes");
 const saveRoutes = require("./routes/saveRoutes");
 
-const { options } = require("pg/lib/defaults");
+const { option } = require("pg/lib/defaults");
 
 // var allowlist = ["http://localhost:3000"];
 // const corsOptionsDelegate = function (req, callback) {
@@ -38,9 +38,12 @@ const { options } = require("pg/lib/defaults");
 //   },
 // };
 
+const whitelist = [
+  "https://mobile-recipe-app.up.railway.app",
+  "http://localhost:3000",
+];
 const corsOptions = {
-  origin: "http://localhost:3000",
-  // origin: "https://belajar-react-wachid.web.app",
+  origin: whitelist,
 };
 
 app.use(
